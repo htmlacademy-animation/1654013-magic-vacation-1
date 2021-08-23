@@ -96,6 +96,7 @@
   max-width: 34rem;
   font-size: 1.8rem;
   line-height: 2rem;
+  opacity: 0;
 
   @media (min-width: $stop-scaling) {
     margin-top: 36px;
@@ -122,6 +123,22 @@
     min-height: 14rem;
     font-size: 1.4rem;
     line-height: 1.5rem;
+  }
+
+  .swiper-slide-active & {
+    animation: 0.3s linear 0.1s 1 sliderTextAppearance normal forwards;
+  }
+
+  .swiper-slide-next & {
+    animation: 0.4s linear 0.3s 1 sliderTextAppearance normal forwards;
+
+    @media (max-width: $mobile), (orientation: portrait) {
+      animation: none;
+    }
+  }
+
+  .slider__item--active-back & {
+    animation-name: sliderTextAppearanceReverse;
   }
 }
 
@@ -215,6 +232,48 @@
     }
   }
 
+  .slider--story-page-1 & {
+    color: $c-purple;
+  }
+
+  .slider--story-page-2 & {
+    color: $c-light-blue;
+  }
+
+  .slider--story-page-3 & {
+    color: $c-dark-blue;
+  }
+
+  .slider--story-page-1 &:hover,
+  .slider--story-page-1 &:focus, {
+    color: $c-light;
+
+    &::before {
+      border-color: $c-dark;
+      background-color: $c-dark;
+    }
+  }
+
+  .slider--story-page-2 &:hover,
+  .slider--story-page-2 &:focus, {
+    color: $c-light;
+
+    &::before {
+      border-color: $c-light-blue;
+      background-color: $c-light-blue;
+    }
+  }
+
+  .slider--story-page-3 &:hover,
+  .slider--story-page-3 &:focus, {
+    color: $c-light;
+
+    &::before {
+      border-color: $c-dark-blue;
+      background-color: $c-dark-blue;
+    }
+  }
+
   &.swiper-button-disabled {
     opacity: 0.5;
     pointer-events: none;
@@ -274,5 +333,29 @@
       height: 0.4rem;
       background-color: $c-light;
     }
+  }
+}
+
+@keyframes sliderTextAppearance {
+  0% {
+    opacity: 0;
+    transform: translateX(10%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes sliderTextAppearanceReverse {
+  0% {
+    opacity: 0;
+    transform: translateX(-10%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

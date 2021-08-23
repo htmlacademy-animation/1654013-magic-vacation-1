@@ -17,6 +17,8 @@
   height: 4rem;
   color: $c-dark;
   border-radius: 50%;
+  transition-property: color, background-color;
+  transition-duration: 0.2s;
 
   @media (max-width: $tablet) and (orientation: portrait) {
     display: none;
@@ -35,6 +37,8 @@
     background-color: $c-light;
     border: 2px solid $c-light;
     z-index: -1;
+    transition-property: width, height;
+    transition-duration: 0.2s;
   }
 
   svg {
@@ -77,6 +81,81 @@
       height: 100%;
       background-color: $c-purple;
       border-color: $c-purple;
+    }
+  }
+
+  .social-block--story-page-1 & {
+    color: $c-purple;
+
+    &:hover {
+      color: $c-dark;
+      border-color: $c-dark;
+    }
+
+    &:focus {
+      color: $c-dark;
+
+      &::before {
+        border-color: $c-dark;
+      }
+    }
+
+    &:active {
+      color: $c-light;
+
+      &::before {
+        background-color: $c-dark;
+      }
+    }
+  }
+
+  .social-block--story-page-2 & {
+    color: $c-dark-blue;
+
+    &:hover {
+      color: $c-light-blue;
+      border-color: $c-light-blue;
+    }
+
+    &:focus {
+      color: $c-light-blue;
+
+      &::before {
+        border-color: $c-light-blue;
+      }
+    }
+
+    &:active {
+      color: $c-light;
+
+      &::before {
+        background-color: $c-light-blue;
+      }
+    }
+  }
+
+  .social-block--story-page-3 & {
+    color: $c-light-blue;
+
+    &:hover {
+      color: $c-dark-blue;
+      border-color: $c-dark-blue;
+    }
+
+    &:focus {
+      color: $c-dark-blue;
+
+      &::before {
+        border-color: $c-dark-blue;
+      }
+    }
+
+    &:active {
+      color: $c-light;
+
+      &::before {
+        background-color: $c-dark-blue;
+      }
     }
   }
 }
@@ -140,11 +219,30 @@
   .social-block--active & {
     opacity: 1;
     pointer-events: auto;
+
+    li {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+
+    li:nth-child(1) {
+      transition-duration: 0.3s;
+    }
+
+    li:nth-child(2) {
+      transition-duration: 0.6s;
+    }
+
+    li:nth-child(3) {
+      transition-duration: 0.9s;
+    }
   }
 
   li {
     flex: none;
     margin-bottom: 0.5rem;
+    opacity: 0;
+    transition-property: transform, opacity;
 
     @media (min-width: $stop-scaling) {
       margin-bottom: 5px;
@@ -152,10 +250,12 @@
 
     @media (max-width: $tablet) and (orientation: portrait) {
       margin: 0 1.25rem;
+      opacity: 1;
     }
 
     @media (max-width: $mobile) and (orientation: landscape) {
       margin: 0 1.25rem;
+      opacity: 1;
     }
   }
 }
@@ -168,6 +268,7 @@
   color: $c-light;
   border: 2px solid transparent;
   border-radius: 50%;
+  transition: all 0.25s;
 
   @media (min-width: $stop-scaling) {
     width: 40px;
@@ -240,5 +341,17 @@
         height: 10px;
       }
     }
+  }
+
+  .social-block--story-page-1 &:hover {
+    color: $c-dark;
+  }
+
+  .social-block--story-page-2 &:hover {
+    color: $c-light-blue;
+  }
+
+  .social-block--story-page-3 &:hover {
+    color: $c-dark-blue;
   }
 }

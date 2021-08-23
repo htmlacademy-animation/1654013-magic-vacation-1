@@ -1,7 +1,9 @@
 import throttle from 'lodash/throttle';
 
 export default class FullPageScroll {
-  constructor() {
+  constructor(eventEmitter) {
+    this.eventEmitter = eventEmitter;
+
     this.THROTTLE_TIMEOUT = 1000;
     this.scrollFlag = true;
     this.timeout = null;
@@ -80,6 +82,12 @@ export default class FullPageScroll {
     });
 
     document.body.dispatchEvent(event);
+
+    this.eventEmitter.emit(`SCREEN_CHANGED`, {
+      'screenId': this.activeScreen,
+      'screenName': this.screenElements[this.activeScreen].id,
+      'screenElement': this.screenElements[this.activeScreen]
+    });
   }
 
   reCalculateActiveScreenPosition(delta) {

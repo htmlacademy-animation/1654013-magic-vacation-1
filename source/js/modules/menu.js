@@ -1,4 +1,4 @@
-export default () => {
+export default (eventEmitter) => {
   let header = document.querySelector(`.js-header`);
   let menuToggler = document.querySelector(`.js-menu-toggler`);
   let menuLinks = document.querySelectorAll(`.js-menu-link`);
@@ -23,4 +23,27 @@ export default () => {
       }
     });
   }
+
+  eventEmitter.on(`STORY_PAGE_CHANGE`, (pageIndex) => {
+    const storyPageModifier1 = `page-header--story-page-1`;
+    const storyPageModifier2 = `page-header--story-page-2`;
+    const storyPageModifier3 = `page-header--story-page-3`;
+    const storyPageModifier4 = `page-header--story-page-4`;
+
+    const modifiers = [
+      storyPageModifier1,
+      storyPageModifier1,
+      storyPageModifier2,
+      storyPageModifier2,
+      storyPageModifier3,
+      storyPageModifier3,
+      storyPageModifier4,
+      storyPageModifier4
+    ];
+
+    header.classList.remove(...modifiers);
+    if (pageIndex !== null) {
+      header.classList.add(modifiers[pageIndex]);
+    }
+  });
 };
