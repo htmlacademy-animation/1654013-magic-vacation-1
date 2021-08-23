@@ -250,10 +250,12 @@
 
     @media (max-width: $tablet) and (orientation: portrait) {
       margin: 0 1.25rem;
+      opacity: 1;
     }
 
     @media (max-width: $mobile) and (orientation: landscape) {
       margin: 0 1.25rem;
+      opacity: 1;
     }
   }
 }
