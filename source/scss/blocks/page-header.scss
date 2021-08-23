@@ -241,16 +241,17 @@
     display: block;
     color: inherit;
     padding: 0 0.5em 0.5em;
+    transition: color 0.2s;
 
     &::after {
       content: "";
       position: absolute;
       bottom: 0;
-      width: 100%;
+      right: 0;
+      width: 0;
       height: 2px;
       background-color: $c-light;
-      display: none;
-      left: 0;
+      transition: width 0.2s;
 
       @media (max-width: $tablet) and (orientation: portrait) {
         left: 0;
@@ -267,7 +268,34 @@
 
     &.active {
       &::after {
-        display: block;
+        width: 100%;
+      }
+    }
+
+    .page-header--story-page-1 &:hover,
+    .page-header--story-page-1 &:focus, {
+      color: $c-dark;
+
+      &::after {
+        background-color: $c-dark;
+      }
+    }
+
+    .page-header--story-page-2 &:hover,
+    .page-header--story-page-2 &:focus, {
+      color: $c-light-blue;
+
+      &::after {
+        background-color: $c-light-blue;
+      }
+    }
+
+    .page-header--story-page-3 &:hover,
+    .page-header--story-page-3 &:focus, {
+      color: $c-dark-blue;
+
+      &::after {
+        background-color: $c-dark-blue;
       }
     }
 
@@ -277,6 +305,9 @@
       outline: none;
 
       &::after {
+        right: auto;
+        left: 0;
+        width: 100%;
         opacity: 1;
         background-color: $c-purple;
       }
