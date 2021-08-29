@@ -35,6 +35,14 @@
   padding: 1rem 0;
   width: 10rem;
   color: $c-light;
+  opacity: 0;
+  transform: translateX(-10%);
+
+  .page-loaded & {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.1s linear, transform 0.2s $header-and-footer-time-func;
+  }
 
   @media (min-width: $stop-scaling) {
     top: -5px;
@@ -242,6 +250,12 @@
     color: inherit;
     padding: 0 0.5em 0.5em;
     transition: color 0.2s;
+    opacity: 0;
+
+    .page-loaded & {
+      opacity: 1;
+      transition: color 0.2s, opacity 0.6s $header-and-footer-time-func;
+    }
 
     &::after {
       content: "";
@@ -266,8 +280,10 @@
       }
     }
 
-    &.active {
+    .page-loaded &.active {
       &::after {
+        right: auto;
+        left: 0;
         width: 100%;
       }
     }

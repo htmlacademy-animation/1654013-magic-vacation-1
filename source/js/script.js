@@ -8,6 +8,7 @@ import chat from './modules/chat.js';
 import result from './modules/result.js';
 import form from './modules/form.js';
 import social from './modules/social.js';
+import page from './modules/page.js';
 import FullPageScroll from './modules/full-page-scroll';
 
 const eventEmitter = new EventEmitter();
@@ -21,6 +22,7 @@ chat();
 result();
 form();
 social(eventEmitter);
+page();
 
 const fullPageScroll = new FullPageScroll(eventEmitter);
 fullPageScroll.init();
