@@ -46,11 +46,22 @@
   color: $c-dark;
   background-color: $c-light;
   z-index: 1;
+  height: 0;
+
+  .page-loaded & {
+    height: 3rem;
+    transition:
+      height 0.2s $header-and-footer-time-func,
+      width 0.2s $header-and-footer-time-func;
+  }
 
   @media (max-width: $tablet) and (orientation: portrait) {
     width: 3.5rem;
-    height: 3.5rem;
     border-radius: 0 3.6rem 0 0;
+
+    .page-loaded & {
+      height: 3.5rem;
+    }
 
     &.screen__footer--full {
       width: 100%;
@@ -60,8 +71,11 @@
 
   @media (max-width: $mobile) and (orientation: landscape) {
     width: 3.5rem;
-    height: 3.5rem;
     border-radius: 0 3.6rem 0 0;
+
+    .page-loaded & {
+      height: 3.5rem;
+    }
 
     &.screen__footer--full {
       width: 100%;

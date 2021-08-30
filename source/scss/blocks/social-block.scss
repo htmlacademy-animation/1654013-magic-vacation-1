@@ -39,6 +39,22 @@
     z-index: -1;
     transition-property: width, height;
     transition-duration: 0.2s;
+    transform: translate(-50%, -50%) scale(0);
+    animation: 0.2s ease-in-out 0.25s 1 socialTogglerAppearance normal forwards;
+  }
+
+  @keyframes socialTogglerAppearance {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+    }
+
+    70% {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
   }
 
   svg {
