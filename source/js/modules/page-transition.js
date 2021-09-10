@@ -1,7 +1,7 @@
 export default (eventEmitter) => {
   const sectionUnfoldingBackground = document.querySelector(`.js-section-unfolding-background`);
 
-  const animateFooterAppearance = (screenElement) => {
+  const animateFooterAppearance = ({screenElement}) => {
     const animatedFooterCloneClass = `animated-footer--screen-transition-clone`;
     const footer = screenElement.querySelector(`.animated-footer`);
 
@@ -33,7 +33,7 @@ export default (eventEmitter) => {
     });
   };
 
-  const animateBackground = ({screenElement, callback}) => {
+  const animateBackground = (params) => {
     const fastHideClass = `section-unfolding-background--fast-hide`;
     const activeClass = `section-unfolding-background--active`;
 
@@ -42,11 +42,11 @@ export default (eventEmitter) => {
       sectionUnfoldingBackground.classList.add(fastHideClass);
       sectionUnfoldingBackground.classList.remove(activeClass);
       setTimeout(() => sectionUnfoldingBackground.classList.remove(fastHideClass));
-      callback();
+      params.callback();
     };
 
     sectionUnfoldingBackground.classList.add(activeClass);
-    animateFooterAppearance(screenElement);
+    animateFooterAppearance(params);
     sectionUnfoldingBackground.addEventListener(`transitionend`, onTransitionEnd);
   };
 
