@@ -11,6 +11,14 @@
         opacity: 1;
       }
     }
+
+    @media (max-width: $tablet) and (orientation: portrait) {
+      animation: none;
+    }
+
+    @media (max-width: $mobile) and (orientation: landscape) {
+      animation: none;
+    }
   }
 
   &--screen-transition-clone {

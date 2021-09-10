@@ -59,7 +59,7 @@
     width: 3.5rem;
     border-radius: 0 3.6rem 0 0;
 
-    &--screen-transition {
+    .page-loaded & {
       height: 3.5rem;
     }
 
@@ -73,7 +73,7 @@
     width: 3.5rem;
     border-radius: 0 3.6rem 0 0;
 
-    &--screen-transition {
+    .page-loaded & {
       height: 3.5rem;
     }
 
