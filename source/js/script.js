@@ -9,6 +9,7 @@ import result from './modules/result.js';
 import form from './modules/form.js';
 import social from './modules/social.js';
 import page from './modules/page.js';
+import pageTransition from './modules/page-transition';
 import FullPageScroll from './modules/full-page-scroll';
 
 const eventEmitter = new EventEmitter();
@@ -23,6 +24,7 @@ result();
 form();
 social(eventEmitter);
 page();
+pageTransition(eventEmitter);
 
 const fullPageScroll = new FullPageScroll(eventEmitter);
 fullPageScroll.init();
