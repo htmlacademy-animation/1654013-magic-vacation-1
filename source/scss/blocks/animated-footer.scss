@@ -1,0 +1,39 @@
+.animated-footer {
+  &--screen-transition &__text {
+    animation: 0.2s ease-in 0s 1 screenTransitionFooterTextAppearance normal forwards;
+
+    @keyframes screenTransitionFooterTextAppearance {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: $tablet) and (orientation: portrait) {
+      animation: none;
+    }
+
+    @media (max-width: $mobile) and (orientation: landscape) {
+      animation: none;
+    }
+  }
+
+  &--screen-transition-clone {
+    position: absolute;
+    bottom: 0;
+    animation: 0.2s ease-in 0s 1 screenTransitionFooterAppearance normal forwards;
+
+    @keyframes screenTransitionFooterAppearance {
+      0% {
+        height: 0;
+      }
+
+      100% {
+        height: 3rem;
+      }
+    }
+  }
+}

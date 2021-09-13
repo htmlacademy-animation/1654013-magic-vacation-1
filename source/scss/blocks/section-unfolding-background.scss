@@ -1,0 +1,18 @@
+.section-unfolding-background {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 0;
+  background-color: $c-dark;
+  transition: height 0.25s linear;
+
+  &--active {
+    height: 100%;
+  }
+
+  &--fast-hide {
+    transition: none;
+  }
+}

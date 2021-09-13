@@ -99,7 +99,7 @@
           </div>
         </div>
       </div>
-      <div class="screen__footer js-footer">
+      <div class="screen__footer animated-footer">
         <button class="screen__footer-enlarge js-footer-toggler" type="button" aria-label="Показать сообщение">
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 6.35337L3.90271 4.99012L0 3.64663L1.34615 1.32374L4.44287 4.01073L3.67364 0H6.34615L5.57692 4.01073L8.65385 1.32374L10 3.64663L6.13405 4.99012L10 6.35337L8.65385 8.65651L5.57692 5.98927L6.34615 10H3.67364L4.44287 5.96952L1.34615 8.65651L0 6.35337Z" fill="currentColor"/>
@@ -111,7 +111,7 @@
             <line x1="0.738319" y1="0.539925" x2="12.3535" y2="12.1551" stroke="currentColor"/>
           </svg>
         </button>
-        <div class="screen__footer-wrapper">
+        <div class="screen__footer-wrapper animated-footer__text">
           <div class="screen__footer-announce">
             <p class="screen__footer-label">Даты проведения конкурса:</p>
             <p class="screen__footer-date">01 — 31.05 / 2020</p>
@@ -183,7 +183,7 @@
       </div>
     </section>
 
-    <section class="screen screen--hidden screen--prizes" id="prizes">
+    <section class="screen screen--hidden screen--prizes" id="prizes" data-unfold-background-from="story">
       <div class="screen__wrapper">
         <div class="prizes">
           <h2 class="prizes__title">ПРизы</h2>
@@ -235,7 +235,7 @@
           </ul>
         </div>
       </div>
-      <div class="screen__footer js-footer">
+      <div class="screen__footer js-footer animated-footer">
         <button class="screen__footer-enlarge js-footer-toggler" type="button" aria-label="Показать сообщение">
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 6.35337L3.90271 4.99012L0 3.64663L1.34615 1.32374L4.44287 4.01073L3.67364 0H6.34615L5.57692 4.01073L8.65385 1.32374L10 3.64663L6.13405 4.99012L10 6.35337L8.65385 8.65651L5.57692 5.98927L6.34615 10H3.67364L4.44287 5.96952L1.34615 8.65651L0 6.35337Z" fill="currentColor"/>
@@ -247,7 +247,7 @@
             <line x1="0.738319" y1="0.539925" x2="12.3535" y2="12.1551" stroke="currentColor"/>
           </svg>
         </button>
-        <div class="screen__footer-wrapper">
+        <div class="screen__footer-wrapper animated-footer__text">
           <div class="screen__footer-announce">
             <p class="screen__footer-label">Даты проведения конкурса:</p>
             <p class="screen__footer-date">01 — 31.05 / 2020</p>
@@ -288,9 +288,9 @@
           <a href="#game" class="rules__link btn">Погнали!</a>
         </div>
       </div>
-      <div class="screen__disclaimer">
+      <div class="screen__disclaimer js-footer animated-footer">
         <div class="disclaimer">
-          <ul>
+          <ul class="animated-footer__text">
             <li>
               <a href="#">Правовая информация</a>
             </li>
@@ -496,7 +496,7 @@
         </div>
       </div>
     </section>
-
+    <div class="section-unfolding-background js-section-unfolding-background"></div>
   </main>
 
 </body>

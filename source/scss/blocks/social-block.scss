@@ -37,22 +37,10 @@
     background-color: $c-light;
     border: 2px solid $c-light;
     z-index: -1;
-    transition-property: width, height;
-    transition-duration: 0.2s;
+    transition: width 0.2s, height 0.2s, transform 0.3s cubic-bezier(0.5, 0.18, 0.34, 1.6) 0.25s;
     transform: translate(-50%, -50%) scale(0);
-    animation: 0.2s ease-in-out 0.25s 1 socialTogglerAppearance normal forwards;
-  }
 
-  @keyframes socialTogglerAppearance {
-    0% {
-      transform: translate(-50%, -50%) scale(0);
-    }
-
-    70% {
-      transform: translate(-50%, -50%) scale(1.2);
-    }
-
-    100% {
+    .page-loaded & {
       transform: translate(-50%, -50%) scale(1);
     }
   }
@@ -238,7 +226,7 @@
 
     li {
       opacity: 1;
-      transform: translateY(-5px);
+      transform: translateY(-0.5rem);
     }
 
     li:nth-child(1) {

@@ -47,12 +47,12 @@
   background-color: $c-light;
   z-index: 1;
   height: 0;
+  transition:
+    height 0.2s $header-and-footer-time-func,
+    width 0.2s $header-and-footer-time-func;
 
   .page-loaded & {
     height: 3rem;
-    transition:
-      height 0.2s $header-and-footer-time-func,
-      width 0.2s $header-and-footer-time-func;
   }
 
   @media (max-width: $tablet) and (orientation: portrait) {
