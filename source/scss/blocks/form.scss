@@ -71,7 +71,7 @@
   border-radius: 3rem;
   outline: none;
   transform: translateY(-50%);
-  animation: 0.2s ease-in 0s 1 formFieldAppearance normal forwards;
+  animation: 0.2s ease-in 0s 1 normal forwards formFieldAppearance;
 
   &:focus {
     border: 1px solid $c-purple;
