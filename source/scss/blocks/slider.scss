@@ -126,11 +126,11 @@
   }
 
   .swiper-slide-active & {
-    animation: 0.3s linear 0.1s 1 sliderTextAppearance normal forwards;
+    animation: 0.3s linear 0.1s 1 normal forwards sliderTextAppearance;
   }
 
   .swiper-slide-next & {
-    animation: 0.4s linear 0.3s 1 sliderTextAppearance normal forwards;
+    animation: 0.4s linear 0.3s 1 normal forwards sliderTextAppearance;
 
     @media (max-width: $mobile), (orientation: portrait) {
       animation: none;

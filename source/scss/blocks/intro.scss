@@ -95,7 +95,7 @@
   line-height: 1.27;
   opacity: 0;
   transform: translateY(2rem);
-  animation: 0.4s ease-in 0.5s 1 introMessageAppearance normal forwards;
+  animation: 0.4s ease-in 0.5s 1 normal forwards introMessageAppearance;
 
   @keyframes introMessageAppearance {
     0% {
