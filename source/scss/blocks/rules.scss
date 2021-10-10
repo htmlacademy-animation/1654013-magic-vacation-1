@@ -1,3 +1,4 @@
+$baseItemAnimationDelay: 0.6s;
 $animationDelayStep: 0.2s;
 $numberOfRules: 3;
 
@@ -35,6 +36,8 @@ $numberOfRules: 3;
   line-height: 0.906;
   letter-spacing: -0.04em;
 
+  @include slideInVerticalUpContainer;
+
   @media (min-width: $stop-scaling) {
     margin-bottom: 50px;
     font-size: 48px;
@@ -62,6 +65,19 @@ $numberOfRules: 3;
   text-transform: uppercase;
   font-size: 2.4rem;
   line-height: 1.2;
+  animation: 0.5s ease-out 0.3s 1 normal both ruleLeadAppearance;
+
+  @keyframes ruleLeadAppearance {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 2rem, 0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
 
   @media (min-width: $stop-scaling) {
     margin-left: 58px;
@@ -126,11 +142,11 @@ $numberOfRules: 3;
   padding-top: 0.6rem;
   padding-left: 6.5rem;
   break-inside: avoid;
-  animation: 0.3s linear 0s 1 both fadeIn;
+  animation: 0.3s linear $baseItemAnimationDelay 1 both fadeIn;
 
   @for $i from 1 through $numberOfRules {
     &:nth-of-type(#{$i + 1}) {
-      $animationDelay: $animationDelayStep * $i;
+      $animationDelay: $baseItemAnimationDelay + $animationDelayStep * $i;
       animation-delay: $animationDelay;
 
       &::before,
@@ -175,7 +191,7 @@ $numberOfRules: 3;
     border-radius: 50%;
     line-height: 5rem;
     text-align: center;
-    animation: 0.2s cubic-bezier(0.18, 0.47, 0.74, 1.55) 0s 1 both zoomIn;
+    animation: 0.2s cubic-bezier(0.18, 0.47, 0.74, 1.55) $baseItemAnimationDelay 1 both zoomIn;
 
     @media (max-width: $tablet) and (orientation: portrait) {
       top: 1rem;
@@ -215,7 +231,7 @@ $numberOfRules: 3;
 }
 
 .rules__link {
-  $linkAppearanceStart: $animationDelayStep * $numberOfRules;
+  $linkAppearanceStart: $baseItemAnimationDelay + $animationDelayStep * $numberOfRules;
   $linkAppearanceDuration: 0.2s;
 
   position: absolute;
