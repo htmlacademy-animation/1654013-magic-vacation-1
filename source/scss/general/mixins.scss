@@ -58,3 +58,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@mixin slideInVerticalUpContainer {
+  margin-top: -2rem;
+  padding-top: 2rem;
+  text-align: left;
+  overflow-y: hidden;
+}

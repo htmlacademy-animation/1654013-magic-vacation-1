@@ -31,6 +31,8 @@
   line-height: 0.906;
   letter-spacing: -0.04em;
 
+  @include slideInVerticalUpContainer;
+
   @media (min-width: $stop-scaling) {
     font-size: 48px;
   }
