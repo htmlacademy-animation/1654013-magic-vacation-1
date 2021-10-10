@@ -108,7 +108,7 @@
     @keyframes flamingoAppearance {
       0% {
         opacity: 0;
-        transform: translateY(140%) rotate(-60deg);
+        transform: translate3d(0, 140%, 0) rotate(-60deg);
       }
 
       50% {
@@ -116,7 +116,7 @@
       }
 
       100% {
-        transform: translateY(0) rotate(0);
+        transform: translate3d(0, 0, 0) rotate(0);
       }
     }
   }
