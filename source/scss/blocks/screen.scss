@@ -1,3 +1,7 @@
+$screenFooterTextAnimationDelay: 0.2s;
+$screenFooterTextMobileAppearance: $screenFooterTextAnimationDelay linear 0.2s 1 normal both;
+$screenFooterTextMobileDisappearance: 0.1s linear 0s 1 normal both;
+
 .screen {
   position: relative;
   display: flex;
@@ -39,6 +43,10 @@
 }
 
 .screen__footer {
+  $openAnimationDuration: 0.2s;
+  $closeAnimationDuration: $openAnimationDuration - 0.1;
+  $animationDelay: $screenFooterTextAnimationDelay;
+
   position: absolute;
   bottom: 0;
   left: 0;
@@ -48,8 +56,14 @@
   z-index: 1;
   height: 0;
   transition:
-    height 0.2s $header-and-footer-time-func,
-    width 0.2s $header-and-footer-time-func;
+    height $closeAnimationDuration $header-and-footer-time-func $animationDelay,
+    width $closeAnimationDuration $header-and-footer-time-func $animationDelay;
+
+  &.screen__footer--full {
+    transition:
+      height $openAnimationDuration $header-and-footer-time-func,
+      width $openAnimationDuration $header-and-footer-time-func;
+  }
 
   .page-loaded & {
     height: 3rem;
@@ -86,22 +100,6 @@
 
 .screen__footer-wrapper {
   @include container;
-
-  @media (max-width: $tablet) and (orientation: portrait) {
-    opacity: 0;
-
-    .screen__footer--full & {
-      opacity: 1;
-    }
-  }
-
-  @media (max-width: $mobile) and (orientation: landscape) {
-    opacity: 0;
-
-    .screen__footer--full & {
-      opacity: 1;
-    }
-  }
 }
 
 .screen__footer-enlarge {
@@ -203,6 +201,22 @@
   text-transform: uppercase;
   font-size: 1.6rem;
   line-height: 1.2;
+
+  @media (max-width: $tablet) and (orientation: portrait) {
+    animation: fadeOut $screenFooterTextMobileDisappearance;
+
+    .screen__footer--full & {
+      animation: fadeIn $screenFooterTextMobileAppearance;
+    }
+  }
+
+  @media (max-width: $mobile) and (orientation: landscape) {
+    animation: fadeOut $screenFooterTextMobileDisappearance;
+
+    .screen__footer--full & {
+      animation: fadeIn $screenFooterTextMobileAppearance;
+    }
+  }
 }
 
 .screen__footer-date {
@@ -211,6 +225,11 @@
   font-weight: 400;
   font-size: 2.4rem;
   line-height: 0.9;
+  animation: fadeOut $screenFooterTextMobileDisappearance;
+
+  .screen__footer--full & {
+    animation: fadeIn $screenFooterTextMobileAppearance;
+  }
 }
 
 .screen__footer-note {
@@ -231,6 +250,17 @@
     text-align: left;
     font-size: 1.4rem;
     line-height: 1.1;
+    animation: fadeOut $screenFooterTextMobileDisappearance;
+    animation-delay: 0s;
+
+    .screen__footer--full & {
+      animation: fadeIn $screenFooterTextMobileAppearance;
+      animation-delay: $screenFooterTextAnimationDelay + 0.1;
+    }
+  }
+
+  @media (max-width: $tablet) and (orientation: landscape) {
+    font-size: 0.9rem;
   }
 
   @media (max-width: $mobile) and (orientation: landscape) {
@@ -239,6 +269,13 @@
     text-align: left;
     font-size: 1.4rem;
     line-height: 1.1;
+    animation: fadeOut $screenFooterTextMobileDisappearance;
+    animation-delay: 0s;
+
+    .screen__footer--full & {
+      animation: fadeIn $screenFooterTextMobileAppearance;
+      animation-delay: $screenFooterTextAnimationDelay + 0.1;
+    }
   }
 
   p {

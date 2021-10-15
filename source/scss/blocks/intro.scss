@@ -126,6 +126,10 @@
     line-height: 1.2;
   }
 
+  @media (max-width: $tablet) and (orientation: landscape) {
+    font-size: 2.2rem;
+  }
+
   @media (max-width: $mobile) and (orientation: landscape) {
     width: 100%;
     max-width: 100%;
