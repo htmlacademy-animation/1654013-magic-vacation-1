@@ -180,6 +180,41 @@
     height: 40px;
   }
 
+  $sliderControlAnimation: sliderControlPrevAppearance 0.3s cubic-bezier(0.18, 0.47, 0.49, 1.05) 0.8s 1 normal both;
+
+  &--prev {
+    animation: $sliderControlAnimation;
+  }
+
+  &--next {
+    animation: $sliderControlAnimation;
+    animation-name: sliderControlNextAppearance;
+  }
+
+  @keyframes sliderControlPrevAppearance {
+    0% {
+      opacity: 0;
+      transform: translate3d(-200%, 0, 0) rotate(180deg);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotate(0);
+    }
+  }
+
+  @keyframes sliderControlNextAppearance {
+    0% {
+      opacity: 0;
+      transform: translate3d(200%, 0, 0) rotate(180deg);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotate(0);
+    }
+  }
+
   &::before {
     @include center;
     content: "";
