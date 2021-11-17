@@ -182,8 +182,7 @@
 
   &--cases {
     margin-left: 7rem;
-    opacity: 0;
-    animation: 0.2s ease-in 3s 1 normal forwards fadeIn;
+    animation: 0.2s ease-in 3s 1 normal both fadeIn;
 
     @media (min-width: $stop-scaling) {
       margin-left: 70px;
@@ -217,8 +216,7 @@
   }
 
   &--codes {
-    opacity: 0;
-    animation: 0.2s ease-in 3s 1 normal forwards fadeIn;
+    animation: 0.2s ease-in 3s 1 normal both fadeIn;
 
     @media (max-width: $tablet) and (orientation: portrait) {
       padding-left: 0.8rem;
@@ -243,6 +241,12 @@
         width: 10rem;
       }
     }
+  }
+}
+
+.prizes__list--loaded {
+  .prizes__item {
+    animation: none;
   }
 }
 

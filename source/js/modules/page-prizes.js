@@ -17,12 +17,19 @@ export default (eventEmitter) => {
   const loadPrizeImages = () => {
     const prizeImages = Array.from(document.querySelectorAll(`.prizes__icon img`));
     prizeImages.forEach((prizeImage) => {
-      prizeImage.setAttribute(`src`, `${prizeImage.dataset.src}?forceReload=${Math.random()}`);
+      prizeImage.setAttribute(`src`, `${prizeImage.dataset.src}`);
+    });
+  };
+  const disableAppearanceAnimation = () => {
+    const lastPrize = document.querySelector(`.prizes__item:last-of-type`);
+    lastPrize.addEventListener(`animationend`, () => {
+      lastPrize.parentElement.classList.add(`prizes__list--loaded`);
     });
   };
   const screenChangeHandler = (event) => {
     if (event.screenName === `prizes`) {
       loadPrizeImages();
+      disableAppearanceAnimation();
     }
   };
   eventEmitter.on(`SCREEN_CHANGED`, screenChangeHandler);
