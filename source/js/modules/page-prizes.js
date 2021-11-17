@@ -17,7 +17,7 @@ export default (eventEmitter) => {
   const loadPrizeImages = () => {
     const prizeImages = Array.from(document.querySelectorAll(`.prizes__icon img`));
     prizeImages.forEach((prizeImage) => {
-      prizeImage.setAttribute(`src`, prizeImage.dataset.src);
+      prizeImage.setAttribute(`src`, `${prizeImage.dataset.src}?forceReload=${Math.random()}`);
     });
   };
   const screenChangeHandler = (event) => {
