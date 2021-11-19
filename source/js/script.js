@@ -32,7 +32,7 @@ page();
 pageTransition(eventEmitter);
 pageMain();
 pageStory();
-pagePrizes();
+pagePrizes(eventEmitter);
 pageRules();
 pageGame();
 

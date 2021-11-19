@@ -1,20 +1,39 @@
 export default (eventEmitter) => {
-  const sectionUnfoldingBackground = document.querySelector(`.js-section-unfolding-background`);
+  const backgroundActiveClass = `section-unfolding-background--active`;
 
-  const animateFooterAppearance = ({screenElement}) => {
+  const getInitialState = () => ({
+    sectionUnfoldingBackground: document.querySelector(`.js-section-unfolding-background`),
+    footerClone: null,
+    isBackgroundAnimationFinished: false,
+    isFooterAnimationFinished: false,
+  });
+
+  const animateFooter = (params, state) => {
     const animatedFooterCloneClass = `animated-footer--screen-transition-clone`;
-    const footer = screenElement.querySelector(`.animated-footer`);
+    const footer = params.screenElement.querySelector(`.animated-footer`);
 
     if (!footer) {
       return;
     }
 
     const clone = footer.cloneNode(true);
-    clone.addEventListener(`animationend`, () => {
-      setTimeout(() => sectionUnfoldingBackground.removeChild(clone), 100);
-    });
-    sectionUnfoldingBackground.appendChild(clone);
+    state.footerClone = clone;
+
+    const onAnimationEnd = () => {
+      clone.removeEventListener(`animationend`, onAnimationEnd);
+      state.isFooterAnimationFinished = true;
+      finishAnimation(params, state);
+    };
+
+    state.sectionUnfoldingBackground.appendChild(clone);
     clone.classList.add(animatedFooterCloneClass);
+    clone.addEventListener(`animationend`, onAnimationEnd);
+  };
+
+  const hideFooter = (params, state) => {
+    setTimeout(() => {
+      state.sectionUnfoldingBackground.removeChild(state.footerClone);
+    });
   };
 
   const animateFooterTextAppearance = ({screenElement}) => {
@@ -33,21 +52,34 @@ export default (eventEmitter) => {
     });
   };
 
-  const animateBackground = (params) => {
-    const fastHideClass = `section-unfolding-background--fast-hide`;
-    const activeClass = `section-unfolding-background--active`;
+  const animateBackground = (params, state) => {
+    const {sectionUnfoldingBackground} = state;
 
     const onTransitionEnd = () => {
       sectionUnfoldingBackground.removeEventListener(`transitionend`, onTransitionEnd);
-      sectionUnfoldingBackground.classList.add(fastHideClass);
-      sectionUnfoldingBackground.classList.remove(activeClass);
-      setTimeout(() => sectionUnfoldingBackground.classList.remove(fastHideClass));
-      params.callback();
+      state.isBackgroundAnimationFinished = true;
+      finishAnimation(params, state);
     };
 
-    sectionUnfoldingBackground.classList.add(activeClass);
-    animateFooterAppearance(params);
+    sectionUnfoldingBackground.classList.add(backgroundActiveClass);
     sectionUnfoldingBackground.addEventListener(`transitionend`, onTransitionEnd);
+  };
+
+  const hideBackground = (params, state) => {
+    const {sectionUnfoldingBackground} = state;
+    const fastHideClass = `section-unfolding-background--fast-hide`;
+
+    sectionUnfoldingBackground.classList.add(fastHideClass);
+    sectionUnfoldingBackground.classList.remove(backgroundActiveClass);
+    setTimeout(() => sectionUnfoldingBackground.classList.remove(fastHideClass));
+  };
+
+  const finishAnimation = (params, state) => {
+    if (state.isBackgroundAnimationFinished && state.isFooterAnimationFinished) {
+      hideBackground(params, state);
+      hideFooter(params, state);
+      params.callback();
+    }
   };
 
   const isBackgroundAnimationRequired = ({screenElement, prevScreenElement}) => {
@@ -56,7 +88,9 @@ export default (eventEmitter) => {
 
   eventEmitter.on(`SCREEN_CHANGE_START`, (params) => {
     if (isBackgroundAnimationRequired(params)) {
-      animateBackground(params);
+      const state = getInitialState();
+      animateBackground(params, state);
+      animateFooter(params, state);
     } else {
       animateFooterTextAppearance(params);
       params.callback();
