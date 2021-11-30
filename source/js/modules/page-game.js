@@ -29,6 +29,10 @@ export default () => {
       });
     };
 
+    const startAnimationChain = (header) => {
+      header.querySelector(`animateTransform`).beginElement();
+    };
+
     const victoryHeader = document.querySelector(`.victory-header`);
     const victoryHeaderAdditional = document.querySelector(`.victory-header-additional`);
     const lossHeader = document.querySelector(`.loss-header`);
@@ -44,7 +48,7 @@ export default () => {
         } else if (button.dataset.target === `result2`) {
           startAnimation(victoryHeaderAdditional);
         } else if (button.dataset.target === `result3`) {
-          startAnimation(lossHeader);
+          startAnimationChain(lossHeader);
         }
       });
     });
