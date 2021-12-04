@@ -1,6 +1,7 @@
 import {animateChars, getCharAnimation} from './char-animation';
+import timer from './timer';
 
-export default () => {
+export default (eventEmitter) => {
   const title = document.querySelector(`.game__title`);
   const animationShifts = [
     0.2,
@@ -54,5 +55,24 @@ export default () => {
     });
   };
 
+  const runTimer = () => {
+    const timerElement = document.querySelector(`.game__counter`);
+    return timer(timerElement.children[0], timerElement.children[1], 5, 0, () => {});
+  };
+
   animateHeaders();
+
+  let cancelTimer;
+
+  const screenChangeHandler = (event) => {
+    if (event.screenName === `game`) {
+      cancelTimer = runTimer();
+    } else {
+      if (cancelTimer) {
+        cancelTimer();
+      }
+    }
+  };
+
+  eventEmitter.on(`SCREEN_CHANGED`, screenChangeHandler);
 };
