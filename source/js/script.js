@@ -34,7 +34,7 @@ pageMain();
 pageStory();
 pagePrizes(eventEmitter);
 pageRules();
-pageGame();
+pageGame(eventEmitter);
 
 const fullPageScroll = new FullPageScroll(eventEmitter);
 fullPageScroll.init();
