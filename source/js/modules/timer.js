@@ -11,8 +11,8 @@ export default (minutesElement, secondsElement, startMinutes, startSeconds, call
     const endTime = timerStartDate.getTime() + timerMinutes * 60 * 1000 + timerSeconds * 1000;
     const remainingTime = endTime - Date.now();
 
-    const remainingMinutes = Math.floor(remainingTime / 1000 / 60);
-    const remainingSeconds = Math.floor(remainingTime / 1000 - remainingMinutes * 60);
+    const remainingMinutes = Math.max(Math.floor(remainingTime / 1000 / 60), 0);
+    const remainingSeconds = Math.max(Math.floor(remainingTime / 1000 - Math.abs(remainingMinutes) * 60), 0);
 
     return {
       minutes: remainingMinutes,
@@ -30,14 +30,22 @@ export default (minutesElement, secondsElement, startMinutes, startSeconds, call
 
   let startDate;
   let animationFrameId;
+  let lastTime;
 
   const runTimer = () => {
     startDate = startDate || getStartDate();
 
     const newTime = getNewTime(startDate, startMinutes, startSeconds);
 
-    setTime(getFormattedTimeUnit(newTime.minutes), minutesElement);
-    setTime(getFormattedTimeUnit(newTime.seconds), secondsElement);
+    if (lastTime && lastTime.minutes !== newTime.minutes) {
+      setTime(getFormattedTimeUnit(newTime.minutes), minutesElement);
+    }
+
+    if (lastTime && lastTime.seconds !== newTime.seconds) {
+      setTime(getFormattedTimeUnit(newTime.seconds), secondsElement);
+    }
+
+    lastTime = newTime;
 
     if (newTime.seconds > 0 || newTime.minutes > 0) {
       animationFrameId = requestAnimationFrame(runTimer);

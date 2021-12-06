@@ -73,6 +73,7 @@
 }
 
 .game__counter {
+  display: flex;
   margin: 0;
   text-transform: uppercase;
   font-family: $font-alt;
@@ -103,6 +104,10 @@
     font-size: 2rem;
     margin-bottom: 1rem;
   }
+
+  span {
+    width: 5rem;
+  }
 }
 
 .game__body {
@@ -116,7 +121,7 @@
   left: 0;
   z-index: 100;
   opacity: 0.5;
-  display: none;
+  //display: none;
 }
 
 .game__button {
