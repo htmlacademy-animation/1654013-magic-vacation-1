@@ -1794,6 +1794,7 @@ img {
 }
 
 .game__counter {
+  display: flex;
   margin: 0;
   text-transform: uppercase;
   font-family: "Radical", "Arial", sans-serif;
@@ -1830,6 +1831,9 @@ img {
     margin-bottom: 1rem;
   }
 }
+.game__counter span {
+  width: 5rem;
+}
 
 .game__body {
   flex-grow: 1;
@@ -1842,7 +1846,6 @@ img {
   left: 0;
   z-index: 100;
   opacity: 0.5;
-  display: none;
 }
 
 .game__button {
