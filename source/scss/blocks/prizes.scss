@@ -213,13 +213,29 @@
         width: 7rem;
       }
     }
+
+    .prizes__counter {
+      width: 5rem;
+    }
   }
 
   &--codes {
-    animation: 0.2s ease-in 3s 1 normal both fadeIn;
+    animation: 0.3s ease-out 5s 1 normal both codesAppearance;
 
     @media (max-width: $tablet) and (orientation: portrait) {
       padding-left: 0.8rem;
+    }
+
+    @keyframes codesAppearance {
+      0% {
+        opacity: 0;
+        transform: translateX(5rem);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .prizes__icon {
@@ -240,6 +256,10 @@
       @media (max-width: $mobile) and (orientation: landscape) {
         width: 10rem;
       }
+    }
+
+    .prizes__counter {
+      width: 18rem;
     }
   }
 }
