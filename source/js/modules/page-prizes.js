@@ -67,7 +67,7 @@ export default (eventEmitter) => {
     };
 
     const onAdditionalPrizeAppearanceAnimationEnd = () => {
-      counter({
+      cancelAdditionalPrizeCounter = counter({
         container: additionalAwardCounterContainer,
         from: 11,
         to: 900,
