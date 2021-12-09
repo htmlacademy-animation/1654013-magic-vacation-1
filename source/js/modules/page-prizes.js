@@ -1,4 +1,5 @@
 import {animateChars, getCharAnimation} from './char-animation';
+import counter from './counter';
 
 export default (eventEmitter) => {
   const title = document.querySelector(`.prizes__title`);
@@ -17,6 +18,8 @@ export default (eventEmitter) => {
   const LOADED_CLASS = `prizes__list--loaded`;
 
   const getPrizeList = () => document.querySelector(`.prizes__list`);
+  const getSecondaryPrize = () => document.querySelector(`.prizes__item--cases`);
+  const getAdditionalPrize = () => document.querySelector(`.prizes__item--codes`);
 
   const loadPrizeImages = () => {
     const prizeImages = Array.from(document.querySelectorAll(`.prizes__icon img`));
@@ -32,20 +35,70 @@ export default (eventEmitter) => {
   const disableAppearanceAnimation = () => {
     const prizeList = getPrizeList();
 
-    const lastPrize = document.querySelector(`.prizes__item:last-of-type`);
+    const additionalPrize = getAdditionalPrize();
 
     const onAnimationEnd = () => {
       prizeList.classList.add(LOADED_CLASS);
-      lastPrize.removeEventListener(`animationend`, onAnimationEnd);
+      additionalPrize.removeEventListener(`animationend`, onAnimationEnd);
     };
 
-    lastPrize.addEventListener(`animationend`, onAnimationEnd);
+    additionalPrize.addEventListener(`animationend`, onAnimationEnd);
+  };
+
+  let cancelSecondaryPrizeCounter;
+  let cancelAdditionalPrizeCounter;
+
+  const runAwardCounters = () => {
+    const secondaryPrize = getSecondaryPrize();
+    const additionalPrize = getAdditionalPrize();
+    const secondaryAwardCounterContainer = document.querySelector(`.prizes__item--cases .prizes__counter`);
+    const additionalAwardCounterContainer = document.querySelector(`.prizes__item--codes .prizes__counter`);
+
+    const onSecondaryPrizeAppearanceAnimationEnd = () => {
+      cancelSecondaryPrizeCounter = counter({
+        container: secondaryAwardCounterContainer,
+        from: 1,
+        to: 7,
+        fps: 12,
+        durationCap: 1,
+      });
+
+      secondaryPrize.removeEventListener(`animationend`, onSecondaryPrizeAppearanceAnimationEnd);
+    };
+
+    const onAdditionalPrizeAppearanceAnimationEnd = () => {
+      counter({
+        container: additionalAwardCounterContainer,
+        from: 11,
+        to: 900,
+        fps: 12,
+        durationCap: 1,
+      });
+
+      additionalPrize.removeEventListener(`animationend`, onAdditionalPrizeAppearanceAnimationEnd);
+    };
+
+    secondaryPrize.addEventListener(`animationend`, onSecondaryPrizeAppearanceAnimationEnd);
+    additionalPrize.addEventListener(`animationend`, onAdditionalPrizeAppearanceAnimationEnd);
+  };
+
+  const cancelRunningAnimations = () => {
+    if (cancelSecondaryPrizeCounter) {
+      cancelSecondaryPrizeCounter();
+    }
+
+    if (cancelAdditionalPrizeCounter) {
+      cancelAdditionalPrizeCounter();
+    }
   };
 
   const screenChangeHandler = (event) => {
     if (event.screenName === `prizes` && !isScreenLoaded()) {
       loadPrizeImages();
       disableAppearanceAnimation();
+      runAwardCounters();
+    } else {
+      cancelRunningAnimations();
     }
   };
 

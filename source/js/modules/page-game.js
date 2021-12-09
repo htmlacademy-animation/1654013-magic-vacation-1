@@ -60,19 +60,22 @@ export default (eventEmitter) => {
     return timer(timerElement.children[0], timerElement.children[1], 5, 0, () => {});
   };
 
-  animateHeaders();
-
   let cancelTimer;
+
+  const cancelRunningAnimations = () => {
+    if (cancelTimer) {
+      cancelTimer();
+    }
+  };
 
   const screenChangeHandler = (event) => {
     if (event.screenName === `game`) {
       cancelTimer = runTimer();
     } else {
-      if (cancelTimer) {
-        cancelTimer();
-      }
+      cancelRunningAnimations();
     }
   };
 
+  animateHeaders();
   eventEmitter.on(`SCREEN_CHANGED`, screenChangeHandler);
 };
