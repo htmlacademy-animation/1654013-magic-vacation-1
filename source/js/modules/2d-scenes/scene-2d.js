@@ -3,7 +3,7 @@ import {SceneImageLoader} from './scene-image-loader';
 import {SceneImage} from './scene-image';
 import {SceneImageDrawer} from './scene-image-drawer';
 
-export class Scene2d {
+export class Scene2D {
   constructor(options) {
     this.sceneCanvas = new SceneCanvas(options.canvas, this.getCanvasSize());
     this.sceneImages = options.images.map((imageOptions) => new SceneImage(imageOptions));
