@@ -1,5 +1,6 @@
 import {animateChars, getCharAnimation} from './char-animation';
 import timer from './timer';
+import resultAnimationTrip from './2d-scenes/result-animation-trip';
 
 export default (eventEmitter) => {
   const title = document.querySelector(`.game__title`);
@@ -46,6 +47,7 @@ export default (eventEmitter) => {
       button.addEventListener(`click`, () => {
         if (button.dataset.target === `result`) {
           startAnimation(victoryHeader);
+          resultAnimationTrip();
         } else if (button.dataset.target === `result2`) {
           startAnimation(victoryHeaderAdditional);
         } else if (button.dataset.target === `result3`) {
