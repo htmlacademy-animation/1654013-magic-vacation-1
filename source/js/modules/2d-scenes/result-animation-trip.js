@@ -86,7 +86,7 @@ export default () => {
 
   const scene = new GameVictoryScene({
     canvas,
-    images
+    images,
   });
 
   scene.prepare().then(() => scene.play());

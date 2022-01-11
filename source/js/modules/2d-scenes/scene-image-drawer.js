@@ -125,10 +125,10 @@ export class SceneImageDrawer {
   }
 
   getTranslateXShift(sceneImage) {
-    return this.sceneCanvas.size * sceneImage.transforms.translateX / 100;
+    return this.sceneCanvas.size * (sceneImage.transforms.translateX || 0) / 100;
   }
 
   getTranslateYShift(sceneImage) {
-    return this.sceneCanvas.size * sceneImage.transforms.translateY / 100;
+    return this.sceneCanvas.size * (sceneImage.transforms.translateY || 0) / 100;
   }
 }

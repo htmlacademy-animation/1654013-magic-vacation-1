@@ -1,6 +1,7 @@
 import {animateChars, getCharAnimation} from './char-animation';
 import timer from './timer';
 import resultAnimationTrip from './2d-scenes/result-animation-trip';
+import resultAnimationLose from './2d-scenes/result-animation-lose';
 
 export default (eventEmitter) => {
   const title = document.querySelector(`.game__title`);
@@ -51,7 +52,13 @@ export default (eventEmitter) => {
         } else if (button.dataset.target === `result2`) {
           startAnimation(victoryHeaderAdditional);
         } else if (button.dataset.target === `result3`) {
-          startAnimationChain(lossHeader);
+          const onSceneAnimationReady = () => {
+            setTimeout(() => {
+              startAnimationChain(lossHeader);
+            }, 200);
+          };
+
+          resultAnimationLose(onSceneAnimationReady);
         }
       });
     });

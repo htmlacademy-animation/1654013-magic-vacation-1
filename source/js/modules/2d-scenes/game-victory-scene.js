@@ -1,8 +1,8 @@
-import {Scene2d} from './scene-2d';
+import {Scene2D} from './scene-2d';
 import {Animation} from './animation';
 import {easeInQuad, easeOutElastic} from './timing-functions';
 
-export class GameVictoryScene extends Scene2d {
+export class GameVictoryScene extends Scene2D {
   constructor(options) {
     super(options);
 
