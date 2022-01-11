@@ -52,8 +52,13 @@ export default (eventEmitter) => {
         } else if (button.dataset.target === `result2`) {
           startAnimation(victoryHeaderAdditional);
         } else if (button.dataset.target === `result3`) {
-          startAnimationChain(lossHeader);
-          resultAnimationLose();
+          const onSceneAnimationReady = () => {
+            setTimeout(() => {
+              startAnimationChain(lossHeader);
+            }, 200);
+          };
+
+          resultAnimationLose(onSceneAnimationReady);
         }
       });
     });

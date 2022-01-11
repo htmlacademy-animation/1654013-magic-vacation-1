@@ -7,7 +7,7 @@ export class GameLoseScene extends Scene2D {
     super(options);
 
     this.locals = {
-      detailsScaleFormula: (progress) => Math.min(0.3 + progress, 2),
+      detailsScaleFormula: (progress) => Math.min(0.3 + progress * 1.5, 2),
       crocodileDuration: 500,
     };
 
@@ -19,7 +19,7 @@ export class GameLoseScene extends Scene2D {
   createDetailsAppearanceAnimationOptions() {
     return {
       duration: 700,
-      delay: 1200,
+      delay: 200,
       easing: easeOutQuad,
     };
   }
@@ -39,7 +39,7 @@ export class GameLoseScene extends Scene2D {
 
   initAnimations() {
     this.initMain();
-    this.initKeyAnimations();
+    this.initLockAnimations();
     this.initFlamingoAnimations();
     this.initWatermelonAnimations();
     this.initLeafAnimations();
@@ -50,16 +50,16 @@ export class GameLoseScene extends Scene2D {
   }
 
   drawLockMask() {
-    const lockImage = this.getImage(`key`);
+    const lockImage = this.getImage(`lock`);
     const {ctx, canvas} = this.sceneCanvas;
     const lockImageWidth = this.imageDrawer.getImageWidth(lockImage);
     const lockImageHeight = this.imageDrawer.getImageHeight(lockImage);
     const lockImageX = this.imageDrawer.getImageX(lockImage, lockImageWidth) + this.imageDrawer.getTranslateXShift(lockImage);
     const lockImageY = this.imageDrawer.getImageY(lockImage, lockImageHeight) + this.imageDrawer.getTranslateYShift(lockImage);
     const LOCK_IMAGE_RADIUS = lockImageHeight * 0.268;
-    const LOCK_IMAGE_LOWER_HEIGHT = lockImageHeight * 0.45;
+    const LOCK_IMAGE_TAIL_HEIGHT = lockImageHeight * 0.45;
     const LOCK_FOUNDATION_ANGLE_TAN = 4.78;
-    const LOCK_IMAGE_BOTTOM_RIGHT_DIFF = LOCK_IMAGE_LOWER_HEIGHT / LOCK_FOUNDATION_ANGLE_TAN;
+    const LOCK_IMAGE_BOTTOM_RIGHT_DIFF = LOCK_IMAGE_TAIL_HEIGHT / LOCK_FOUNDATION_ANGLE_TAN;
     const ARC_START_ANGLE = -Math.PI / 2;
     const ARC_END_ANGLE = Math.PI / 3.61;
     const maskX = lockImageX + lockImageWidth / 2;
@@ -71,8 +71,8 @@ export class GameLoseScene extends Scene2D {
     ctx.fillStyle = `#5F458C`;
     ctx.beginPath();
     ctx.arc(maskX, maskY, LOCK_IMAGE_RADIUS, ARC_START_ANGLE, ARC_END_ANGLE);
-    ctx.lineTo(xAfterArc + LOCK_IMAGE_BOTTOM_RIGHT_DIFF, maskY + LOCK_IMAGE_LOWER_HEIGHT + LOCK_IMAGE_RADIUS);
-    ctx.lineTo(xAfterArc + LOCK_IMAGE_BOTTOM_RIGHT_DIFF + canvas.width / 2, maskY + LOCK_IMAGE_LOWER_HEIGHT + LOCK_IMAGE_RADIUS);
+    ctx.lineTo(xAfterArc + LOCK_IMAGE_BOTTOM_RIGHT_DIFF, maskY + LOCK_IMAGE_TAIL_HEIGHT + LOCK_IMAGE_RADIUS);
+    ctx.lineTo(xAfterArc + LOCK_IMAGE_BOTTOM_RIGHT_DIFF + canvas.width / 2, maskY + LOCK_IMAGE_TAIL_HEIGHT + LOCK_IMAGE_RADIUS);
     ctx.lineTo(xAfterArc + LOCK_IMAGE_BOTTOM_RIGHT_DIFF + canvas.width / 2, maskY - LOCK_IMAGE_RADIUS);
     ctx.lineTo(maskX, maskY - LOCK_IMAGE_RADIUS);
     ctx.closePath();
@@ -91,18 +91,19 @@ export class GameLoseScene extends Scene2D {
     }));
   }
 
-  initKeyAnimations() {
-    const keyImage = this.getImage(`key`);
+  initLockAnimations() {
+    const lockImage = this.getImage(`lock`);
     const scaleFormula = (progress) => Math.min(0.7 + (progress / 4), 1);
 
     this.animations.push(new Animation({
       func: (progress) => {
-        keyImage.transforms.scaleX = scaleFormula(progress);
-        keyImage.transforms.scaleY = scaleFormula(progress);
-        keyImage.opacity = progress;
+        lockImage.transforms.scaleX = scaleFormula(progress);
+        lockImage.transforms.scaleY = scaleFormula(progress);
+        lockImage.transforms.translateX = -progress * 2;
+        lockImage.opacity = progress;
       },
-      duration: 200,
-      delay: 1000,
+      duration: 300,
+      delay: 0,
       easing: easeOutCubic,
     }));
   }
@@ -210,6 +211,7 @@ export class GameLoseScene extends Scene2D {
     this.animations.push(new Animation({
       func: (progress) => {
         crocodileImage.opacity = progress;
+        crocodileImage.transforms.rotate = 15 - progress * 15;
         crocodileImage.transforms.translateX = -31 * progress;
         crocodileImage.transforms.translateY = 15 * progress;
       },

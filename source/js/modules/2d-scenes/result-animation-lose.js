@@ -1,10 +1,10 @@
 import {GameLoseScene} from './game-lose-scene';
 
-export default () => {
+export default (onSceneAnimationReady) => {
   const canvas = document.getElementById(`canvas-result-lose`);
   const images = [
     {
-      id: `key`,
+      id: `lock`,
       x: 50,
       y: 50,
       size: 20,
@@ -13,7 +13,7 @@ export default () => {
         scaleX: 0.7,
         scaleY: 0.7,
       },
-      source: `/img/results/lose/key.png`
+      source: `/img/results/lose/lock.png`
     },
     {
       id: `crocodile`,
@@ -21,7 +21,9 @@ export default () => {
       y: 40,
       size: 80,
       opacity: 0,
-      transforms: {},
+      transforms: {
+        rotate: 15
+      },
       source: `/img/results/lose/crocodile.png`
     },
     {
@@ -108,5 +110,8 @@ export default () => {
     images,
   });
 
-  scene.prepare().then(() => scene.play());
+  scene.prepare().then(() => {
+    onSceneAnimationReady();
+    scene.play();
+  });
 };
